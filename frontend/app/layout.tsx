@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { Plus_Jakarta_Sans, Work_Sans, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -6,8 +6,17 @@ import { cn } from "@/lib/utils"
 import { getLocale, getMessages } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { ReactNode } from "react"
+import HubLayout from "@/components/layout/hub-layout"
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
+const plusJakartaSans = Plus_Jakarta_Sans({ 
+  subsets: ["latin"], 
+  variable: "--font-sans" 
+})
+
+const workSans = Work_Sans({ 
+  subsets: ["latin"], 
+  variable: "--font-body" 
+})
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -30,13 +39,16 @@ export default async function RootLayout({
         "antialiased",
         fontMono.variable,
         "font-sans",
-        geist.variable
+        plusJakartaSans.variable,
+        workSans.variable
       )}
     >
       <body>
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+            <HubLayout>
+              {children}
+            </HubLayout>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

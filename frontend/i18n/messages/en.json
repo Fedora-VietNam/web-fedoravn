@@ -50,5 +50,18 @@
   "community-title": "Join the Fedora Vietnam Community",
   "community-desc": "Ask questions, share practical tips, and co-create high-quality Fedora documentation.",
   "community-tg": "Join Telegram",
-  "community-dc": "Join Discord"
+  "community-dc": "Join Discord",
+  "hub-title": "Fedora Community",
+  "hub-nav-discussions": "Discussions",
+  "hub-nav-calendar": "Calendar",
+  "hub-nav-badges": "Badges",
+  "hub-nav-docs": "Docs",
+  "hub-search-placeholder": "Search Fedora...",
+  "hub-join-now": "Join Now",
+  "hub-hero-v40": "Version 40 Now Available",
+  "hub-hero-title": "Innovation for the Open Source World",
+  "hub-hero-desc": "Fedora provides an innovative, open, and free platform for hardware, clouds, and containers that enables developers to build tailored solutions.",
+  "hub-get-fedora": "Get Fedora",
+  "hub-join-community": "Join the Community",
+  "portal": "Portal"
 }
