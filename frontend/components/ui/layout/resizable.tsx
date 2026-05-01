@@ -1,0 +1,69 @@
+"use client"
+
+import * as ResizablePrimitive from "react-resizable-panels"
+
+import { cn } from "@/lib/utils"
+
+/**
+ * @brief Renders a group of resizable panels.
+ *
+ * @param props.className - Additional CSS classes for the group container
+ * @returns JSX element representing the ResizablePanelGroup component
+ */
+function ResizablePanelGroup({
+  className,
+  ...props
+}: ResizablePrimitive.GroupProps) {
+  return (
+    <ResizablePrimitive.Group
+      data-slot="resizable-panel-group"
+      className={cn(
+        "flex h-full w-full aria-[orientation=vertical]:flex-col",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+/**
+ * @brief Renders an individual panel within a resizable group.
+ *
+ * @param props - All props accepted by the original ResizablePrimitive.Panel component
+ * @returns JSX element representing the ResizablePanel component
+ */
+function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
+  return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />
+}
+
+/**
+ * @brief Renders a handle to resize panels.
+ *
+ * @param props.withHandle - Whether to show a visual handle icon
+ * @param props.className  - Additional CSS classes for the handle container
+ * @returns JSX element representing the ResizableHandle component
+ */
+function ResizableHandle({
+  withHandle,
+  className,
+  ...props
+}: ResizablePrimitive.SeparatorProps & {
+  withHandle?: boolean
+}) {
+  return (
+    <ResizablePrimitive.Separator
+      data-slot="resizable-handle"
+      className={cn(
+        "relative flex w-px items-center justify-center bg-border ring-offset-background after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-hidden aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-1 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 [&[aria-orientation=horizontal]>div]:rotate-90",
+        className
+      )}
+      {...props}
+    >
+      {withHandle && (
+        <div className="z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border" />
+      )}
+    </ResizablePrimitive.Separator>
+  )
+}
+
+export { ResizableHandle, ResizablePanel, ResizablePanelGroup }
