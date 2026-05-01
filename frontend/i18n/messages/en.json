@@ -11,6 +11,7 @@
   "hero-cta2": "Read Documentation",
   "hero-stat1": "Open content, easy to contribute",
   "hero-stat2": "Optimized for desktop users",
+  "hero-stat3-label": "Active",
   "hero-stat3": "Updated continuously",
   "aside-title": "Quick Access",
   "aside-quick1": "Install Fedora Workstation from USB",
@@ -124,5 +125,14 @@
   "forum-started-by": "Started by",
   "forum-replies": "Replies",
   "forum-views": "Views",
-  "forum-load-more": "Load More Discussions"
+  "forum-load-more": "Load More Discussions",
+  "contributors-others": "And hundreds of other contributors across Vietnam",
+  "auth-login-error": "Invalid username, email, or password.",
+  "auth-generic-error": "An error occurred. Please try again.",
+  "auth-signup-success": "Registration successful!",
+  "footer-disclaimer-label": "Disclaimer",
+  "footer-trademark-label": "Trademark",
+  "footer-privacy-label": "Privacy",
+  "footer-terms": "Terms of Use",
+  "footer-built-by": "Built by the Vietnamese community"
 }

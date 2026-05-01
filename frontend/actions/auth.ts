@@ -12,9 +12,17 @@ const SignupSchema = z.object({
   password: z.string().min(6),
 })
 
+/**
+ * @brief Registers a new user in the system.
+ * 
+ * Note: Currently disabled and returns an error message.
+ * 
+ * @param formData - The form data containing user details (name, username, phone, email, password)
+ * @returns An object containing either a success message or an error message
+ */
 export async function signup(formData: FormData) {
   return { error: "Chưa mở đăng ký, vui lòng liên hệ admin" }
-
+/*
   const name = formData.get("name") as string
   const username = formData.get("username") as string
   const phone = formData.get("phone") as string
@@ -28,7 +36,7 @@ export async function signup(formData: FormData) {
   }
 
   const existingUser = await prisma.user.findFirst({
-    where: { 
+    where: {
       OR: [
         { email },
         { username }
@@ -52,5 +60,5 @@ export async function signup(formData: FormData) {
     },
   })
 
-  return { success: "Đăng ký thành công! Vui lòng đăng nhập." }
+  return { success: "Đăng ký thành công! Vui lòng đăng nhập." }*/
 }

@@ -3,6 +3,15 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 
+/**
+ * @brief A provider component that enables theme support (Light/Dark mode) across the application.
+ * 
+ * Also includes a keyboard hotkey ('d') to toggle themes.
+ * 
+ * @param props.children - The application content that requires theme context
+ * @param props.props - Additional props passed to the underlying next-themes provider
+ * @returns A context provider for theme management.
+ */
 function ThemeProvider({
   children,
   ...props
@@ -21,6 +30,12 @@ function ThemeProvider({
   )
 }
 
+/**
+ * @brief Checks if the given event target is an interactive typing element.
+ * 
+ * @param target - The event target to check
+ * @returns True if the target is an input, textarea, select, or contenteditable element.
+ */
 function isTypingTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) {
     return false
@@ -34,9 +49,13 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
+/**
+ * @brief A headless component that listens for global keyboard shortcuts.
+ */
 function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
 
+  // Register 'd' key to toggle theme, ignoring it when typing in inputs
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.defaultPrevented || event.repeat) {

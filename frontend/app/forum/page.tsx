@@ -1,4 +1,4 @@
-import { ForumContent } from "@/components/forum/forum-content"
+import { ForumContent } from "@/components"
 
 export default function ForumPage() {
   return (

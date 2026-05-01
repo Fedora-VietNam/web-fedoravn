@@ -4,6 +4,12 @@ import { cookies } from "next/headers"
 
 const LOCALES = ["en", "vi"]
 
+/**
+ * @brief Updates the application locale by setting a cookie.
+ * 
+ * @param locale - The locale string to set (e.g., "en", "vi")
+ * @returns Promise that resolves when the cookie is set
+ */
 export async function setLocale(locale: string) {
   if (!LOCALES.includes(locale)) return
 
