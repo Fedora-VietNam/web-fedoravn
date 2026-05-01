@@ -19,12 +19,10 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <button 
-      onClick={toggleLocale} 
+    <button
+      onClick={toggleLocale}
       disabled={isPending}
-      className={`p-2 rounded-lg transition-colors text-xs font-bold min-w-[40px] flex items-center justify-center
-        ${isPending ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 text-site-muted hover:text-white'}
-      `}
+      className={`flex min-w-[40px] items-center justify-center rounded-lg p-2 text-xs font-bold transition-colors ${isPending ? "cursor-not-allowed opacity-50" : "text-site-muted hover:bg-site-bg-soft hover:text-site-text"} `}
       aria-label="Toggle language"
     >
       {locale === "en" ? "🇺🇸 EN" : "🇻🇳 VI"}

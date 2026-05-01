@@ -6,6 +6,8 @@ import { getLocale, getMessages } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { ReactNode } from "react"
 import HubLayout from "@/components/layout/hub-layout"
+import { AppSettingsProvider } from "@/hooks/use-app-settings"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -48,7 +50,11 @@ export default async function RootLayout({
       <body>
         <SessionProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <HubLayout>{children}</HubLayout>
+            <ThemeProvider>
+              <AppSettingsProvider>
+                <HubLayout>{children}</HubLayout>
+              </AppSettingsProvider>
+            </ThemeProvider>
           </NextIntlClientProvider>
         </SessionProvider>
       </body>

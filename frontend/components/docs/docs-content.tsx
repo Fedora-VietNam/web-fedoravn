@@ -4,15 +4,15 @@ import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { 
-  Book, 
-  ChevronRight, 
-  FileText, 
+import {
+  Book,
+  ChevronRight,
+  FileText,
   Plus,
   Terminal,
   Settings,
   Cpu,
-  Info
+  Info,
 } from "lucide-react"
 import { motion } from "motion/react"
 
@@ -20,7 +20,9 @@ export function DocsContent() {
   const t = useTranslations()
   const { data: session } = useSession()
   const router = useRouter()
-  const [activeCategory, setActiveCategory] = useState(t("docs-cat-getting-started"))
+  const [activeCategory, setActiveCategory] = useState(
+    t("docs-cat-getting-started")
+  )
 
   const categories = [
     { name: t("docs-cat-getting-started"), icon: Book },
@@ -31,11 +33,31 @@ export function DocsContent() {
   ]
 
   const articles = [
-    { id: "intro", title: "Introduction to Fedora Vietnam", category: t("docs-cat-getting-started") },
-    { id: "usb", title: "Creating a Bootable USB", category: t("docs-cat-installation") },
-    { id: "dual-boot", title: "Standard Dual Boot with Windows", category: t("docs-cat-installation") },
-    { id: "input", title: "Configuring Vietnamese Input", category: t("docs-cat-system-setup") },
-    { id: "docker", title: "Setting up Docker on Fedora", category: t("docs-cat-development") },
+    {
+      id: "intro",
+      title: "Introduction to Fedora Vietnam",
+      category: t("docs-cat-getting-started"),
+    },
+    {
+      id: "usb",
+      title: "Creating a Bootable USB",
+      category: t("docs-cat-installation"),
+    },
+    {
+      id: "dual-boot",
+      title: "Standard Dual Boot with Windows",
+      category: t("docs-cat-installation"),
+    },
+    {
+      id: "input",
+      title: "Configuring Vietnamese Input",
+      category: t("docs-cat-system-setup"),
+    },
+    {
+      id: "docker",
+      title: "Setting up Docker on Fedora",
+      category: t("docs-cat-development"),
+    },
   ]
 
   const handleContribute = () => {
@@ -47,25 +69,27 @@ export function DocsContent() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
       {/* Sidebar */}
-      <aside className="lg:col-span-3 space-y-8">
+      <aside className="space-y-8 lg:col-span-3">
         <div className="space-y-4">
-          <h3 className="text-white font-bold uppercase tracking-wider text-sm opacity-50 px-4">{t("docs-categories")}</h3>
+          <h3 className="px-4 text-sm font-bold tracking-wider text-site-text uppercase opacity-50 transition-colors">
+            {t("docs-categories")}
+          </h3>
           <nav className="space-y-1">
             {categories.map((cat) => (
               <button
                 key={cat.name}
                 onClick={() => setActiveCategory(cat.name)}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all ${
-                  activeCategory === cat.name 
-                    ? "bg-site-primary/10 text-site-primary border border-site-primary/20" 
-                    : "text-site-muted hover:bg-white/5 hover:text-white"
+                className={`flex w-full items-center justify-between rounded-xl px-4 py-3 transition-all ${
+                  activeCategory === cat.name
+                    ? "border border-site-primary/20 bg-site-primary/10 text-site-primary transition-colors"
+                    : "text-site-text transition-colors hover:bg-site-bg-soft hover:text-site-text"
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <cat.icon size={18} />
-                  <span className="font-bold text-sm">{cat.name}</span>
+                  <span className="text-sm font-bold">{cat.name}</span>
                 </div>
                 {activeCategory === cat.name && <ChevronRight size={14} />}
               </button>
@@ -73,9 +97,9 @@ export function DocsContent() {
           </nav>
         </div>
 
-        <button 
+        <button
           onClick={handleContribute}
-          className="w-full btn-site-primary flex items-center justify-center gap-2 py-4 shadow-lg shadow-site-primary/20"
+          className="btn-site-primary flex w-full items-center justify-center gap-2 py-4 shadow-lg shadow-site-primary/20"
         >
           <Plus size={20} />
           {t("docs-contribute")}
@@ -83,17 +107,19 @@ export function DocsContent() {
       </aside>
 
       {/* Main Content */}
-      <main className="lg:col-span-9 space-y-12">
+      <main className="space-y-12 lg:col-span-9">
         <div className="space-y-4">
-          <h1 className="text-4xl font-extrabold text-white">{activeCategory}</h1>
-          <p className="text-site-muted font-body text-lg">
+          <h1 className="text-4xl font-extrabold text-site-text transition-colors">
+            {activeCategory}
+          </h1>
+          <p className="font-body text-lg text-site-text transition-colors">
             {t("docs-explore")} {activeCategory}.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {articles
-            .filter(art => art.category === activeCategory)
+            .filter((art) => art.category === activeCategory)
             .map((art, idx) => (
               <motion.div
                 key={idx}
@@ -101,24 +127,34 @@ export function DocsContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 onClick={() => router.push(`/docs/${art.id}`)}
-                className="glass-card group cursor-pointer hover:border-site-primary/50 transition-colors"
+                className="glass-card group cursor-pointer transition-colors hover:border-site-primary/50"
               >
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-site-muted group-hover:text-site-primary transition-colors">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-site-bg-soft text-site-text transition-colors group-hover:text-site-primary">
                       <FileText size={20} />
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-site-primary transition-colors">{art.title}</h3>
-                    <p className="text-sm text-site-muted font-body">{t("docs-updated")}</p>
+                    <h3 className="text-xl font-bold text-site-text transition-colors group-hover:text-site-primary">
+                      {art.title}
+                    </h3>
+                    <p className="font-body text-sm text-site-text transition-colors">
+                      {t("docs-updated")}
+                    </p>
                   </div>
-                  <ChevronRight className="text-site-muted group-hover:translate-x-1 transition-transform" size={20} />
+                  <ChevronRight
+                    className="text-site-text transition-colors transition-transform group-hover:translate-x-1"
+                    size={20}
+                  />
                 </div>
               </motion.div>
             ))}
-          
-          {articles.filter(art => art.category === activeCategory).length === 0 && (
-            <div className="col-span-full py-20 text-center glass-card border-dashed">
-              <p className="text-site-muted italic">{t("docs-empty")}</p>
+
+          {articles.filter((art) => art.category === activeCategory).length ===
+            0 && (
+            <div className="glass-card col-span-full border-dashed py-20 text-center transition-colors">
+              <p className="text-site-text italic transition-colors">
+                {t("docs-empty")}
+              </p>
             </div>
           )}
         </div>
