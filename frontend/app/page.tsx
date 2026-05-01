@@ -2,267 +2,303 @@
 
 import {
   Download,
+  BookOpen,
   ArrowRight,
   CheckCircle2,
-  Code,
-  Palette,
-  Edit3,
-  Languages,
-  Monitor,
-  Server,
-  Cloud,
   Cpu,
+  Settings,
   Terminal,
+  Wifi,
+  Zap,
+  Users,
+  MessageCircle,
+  FileText,
 } from "lucide-react"
 import { motion } from "motion/react"
 import { useTranslations } from "next-intl"
 
 export default function Portal() {
   const t = useTranslations()
-  const stats = [
-    { label: "Active Users", value: "2M+", color: "text-brand-secondary" },
-    { label: "Contributors", value: "50k+", color: "text-brand-secondary" },
-    { label: "Local Groups", value: "120+", color: "text-brand-secondary" },
-    { label: "Releases", value: "40", color: "text-brand-secondary" },
+
+  const quickStart = [
+    {
+      title: t("start-c1t"),
+      desc: t("start-c1d"),
+      icon: Download,
+      tag: "Install",
+    },
+    {
+      title: t("start-c2t"),
+      desc: t("start-c2d"),
+      icon: Settings,
+      tag: "Setup",
+    },
+    {
+      title: t("start-c3t"),
+      desc: t("start-c3d"),
+      icon: Terminal,
+      tag: "Productivity",
+    },
   ]
 
-  const editions = [
+  const guides = [
     {
-      name: "Workstation",
-      desc: "A polished, easy-to-use operating system for laptop and desktop computers.",
-      icon: Monitor,
-      tags: ["GNOME 46", "Wayland"],
-      large: true,
-    },
-    {
-      name: "Server",
-      desc: "A short-lifecycle, community-supported server OS with the latest tech.",
-      icon: Server,
-      dark: true,
-    },
-    {
-      name: "Cloud",
-      desc: "Images for public and private clouds like AWS, Azure, and OpenStack.",
-      icon: Cloud,
-    },
-    {
-      name: "IoT",
-      desc: "A foundation for IoT ecosystems with secure updates.",
+      title: t("guides-c1t"),
+      desc: t("guides-c1d"),
+      tag: "GUIDE",
       icon: Cpu,
     },
     {
-      name: "CoreOS",
-      desc: "Automatically updating, minimal OS for containerized workloads.",
+      title: t("guides-c2t"),
+      desc: t("guides-c2d"),
+      tag: "TROUBLESHOOT",
+      icon: Wifi,
+    },
+    {
+      title: t("guides-c3t"),
+      desc: t("guides-c3d"),
+      tag: "DEV",
       icon: Terminal,
+    },
+    {
+      title: t("guides-c4t"),
+      desc: t("guides-c4d"),
+      tag: "PERFORMANCE",
+      icon: Zap,
     },
   ]
 
-  const paths = [
-    { name: "I enjoy Coding", icon: Code },
-    { name: "I enjoy Design", icon: Palette },
-    { name: "I enjoy Writing", icon: Edit3 },
-    { name: "I enjoy Languages", icon: Languages },
+  const whyFedora = [
+    { title: t("why-item1-t"), desc: t("why-item1-d") },
+    { title: t("why-item2-t"), desc: t("why-item2-d") },
+    { title: t("why-item3-t"), desc: t("why-item3-d") },
+    { title: t("why-item4-t"), desc: t("why-item4-d") },
+  ]
+
+  const communityCards = [
+    { title: t("community-card1-t"), desc: t("community-card1-d"), icon: FileText },
+    { title: t("community-card2-t"), desc: t("community-card2-d"), icon: Users },
+    { title: t("community-card3-t"), desc: t("community-card3-d"), icon: MessageCircle },
   ]
 
   return (
-    <div className="space-y-16 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0f2a5a] via-[#1a3a6a] to-[#2a5fa4] p-8 md:p-16 text-white">
-        <div className="relative z-10 max-w-2xl space-y-8">
+    <div className="container mx-auto px-6 py-12 space-y-24">
+      {/* HERO SECTION */}
+      <section className="hero grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="lg:col-span-8 glass-card flex flex-col justify-center space-y-8 py-16">
           <motion.span
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="inline-block bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs font-semibold uppercase tracking-widest text-brand-tertiary"
+            className="kicker w-fit"
           >
-            {t("hub-hero-v40")}
+            {t("hero-kicker")}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight"
+            className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white text-glow"
           >
-            {t("hub-hero-title")}
+            {t("hero-title")}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-blue-100 max-w-xl font-body"
+            className="text-lg md:text-xl text-site-muted max-w-2xl font-body"
           >
-            {t("hub-hero-desc")}
+            {t("hero-lead")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 pt-4"
           >
-            <button className="bg-white text-brand-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-slate-50 transition-all shadow-lg">
+            <button className="btn-site-primary flex items-center gap-2">
               <Download size={20} />
-              {t("hub-get-fedora")}
+              {t("hero-cta1")}
             </button>
-            <button className="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-2">
-              {t("hub-join-community")}
+            <button className="btn-site-ghost flex items-center gap-2">
+              <BookOpen size={20} />
+              {t("hero-cta2")}
             </button>
           </motion.div>
+          <div className="stats grid grid-cols-2 md:grid-cols-3 gap-4 pt-8">
+            <div className="stat">
+              <b className="text-white">100% Open</b>
+              <span>{t("hero-stat1")}</span>
+            </div>
+            <div className="stat">
+              <b className="text-white">Desktop-first</b>
+              <span>{t("hero-stat2")}</span>
+            </div>
+            <div className="stat">
+              <b className="text-white">
+                <span className="dot inline-block w-2 h-2 rounded-full bg-site-ok mr-2 shadow-[0_0_12px_#39c77a]"></span>
+                Active
+              </b>
+              <span>{t("hero-stat3")}</span>
+            </div>
+          </div>
         </div>
 
-        {/* Abstract Background Decoration */}
-        <div className="absolute right-[-10%] bottom-[-20%] p-20 bg-blue-400/10 blur-[120px] rounded-full"></div>
+        <aside className="lg:col-span-4 glass-card flex flex-col justify-between">
+          <div className="space-y-6">
+            <h3 className="text-xl font-bold text-white uppercase tracking-wider">{t("aside-title")}</h3>
+            <ul className="space-y-4 font-body text-site-muted">
+              <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                <ArrowRight size={16} className="text-site-primary group-hover:translate-x-1 transition-transform" />
+                {t("aside-quick1")}
+              </li>
+              <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                <ArrowRight size={16} className="text-site-primary group-hover:translate-x-1 transition-transform" />
+                {t("aside-quick2")}
+              </li>
+              <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                <ArrowRight size={16} className="text-site-primary group-hover:translate-x-1 transition-transform" />
+                {t("aside-quick3")}
+              </li>
+              <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer group">
+                <ArrowRight size={16} className="text-site-primary group-hover:translate-x-1 transition-transform" />
+                {t("aside-quick4")}
+              </li>
+            </ul>
+          </div>
+          <div className="pt-8 border-t border-white/5 mt-8">
+            <p className="text-sm text-site-muted italic leading-relaxed">
+              {t("aside-note")}
+            </p>
+          </div>
+        </aside>
       </section>
 
-      {/* Bento Grid: Editions */}
-      <section className="space-y-12">
-        <div>
-          <h2 className="text-3xl font-bold text-brand-primary mb-2">
-            Explore Fedora Editions
-          </h2>
-          <p className="text-slate-500 max-w-2xl font-body">
-            Tailored experiences for every user, from workstation to server.
+      {/* QUICK START SECTION */}
+      <section id="start" className="space-y-12">
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold text-white">{t("start-title")}</h2>
+          <p className="text-site-muted max-w-2xl font-body">
+            {t("start-desc")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {editions.map((edition, idx) => (
-            <motion.div
-              key={edition.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+          {quickStart.map((item, idx) => (
+            <motion.article
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className={`
-                group p-8 rounded-2xl border transition-all duration-300
-                ${edition.large ? "md:col-span-2" : ""}
-                ${
-                  edition.dark
-                    ? "bg-brand-primary text-white border-brand-primary"
-                    : "bg-white border-slate-200 hover:border-brand-secondary/30 hover:shadow-xl hover:shadow-blue-900/5"
-                }
-              `}
+              viewport={{ once: true }}
+              className="glass-card space-y-6"
             >
-              <div
-                className={`
-                w-12 h-12 rounded-xl flex items-center justify-center mb-6
-                ${edition.dark ? "bg-white/10" : "bg-blue-50"}
-              `}
-              >
-                <edition.icon
-                  className={
-                    edition.dark ? "text-white" : "text-brand-secondary"
-                  }
-                  size={24}
-                />
+              <div className="w-12 h-12 rounded-xl bg-site-primary/10 flex items-center justify-center">
+                <item.icon className="text-site-primary" size={24} />
               </div>
-              <h3
-                className={`text-2xl font-bold mb-4 ${edition.dark ? "text-white" : "text-brand-primary"}`}
-              >
-                {edition.name}
-              </h3>
-              <p
-                className={`font-body mb-6 ${edition.dark ? "text-blue-100/80" : "text-slate-500"}`}
-              >
-                {edition.desc}
-              </p>
-
-              {edition.large && edition.tags && (
-                <div className="flex items-center gap-3">
-                  {edition.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-blue-50 text-blue-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {edition.dark && (
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm font-bold border-b-2 border-white/30 hover:border-white transition-all pb-1 mt-4"
-                >
-                  Learn More <ArrowRight size={14} />
-                </a>
-              )}
-            </motion.div>
+              <div className="space-y-3">
+                <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                <p className="text-site-muted font-body text-sm leading-relaxed">{item.desc}</p>
+              </div>
+              <span className="inline-block bg-[#16264b] border border-[#3e5a96] text-[#cde0ff] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                {item.tag}
+              </span>
+            </motion.article>
           ))}
         </div>
       </section>
 
-      {/* Community Impact Stats */}
-      <section className="bg-white border border-slate-200 rounded-3xl p-8 md:p-12 shadow-sm">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+      {/* FEATURED GUIDES SECTION */}
+      <section id="guides" className="space-y-12">
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold text-white">{t("guides-title")}</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {guides.map((guide, idx) => (
+            <motion.article
+              key={idx}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="glass-card flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                  <guide.icon className="text-site-muted" size={20} />
+                </div>
+                <h3 className="text-lg font-bold text-white leading-tight">{guide.title}</h3>
+                <p className="text-sm text-site-muted font-body">{guide.desc}</p>
+              </div>
+              <div className="mt-6">
+                <span className="inline-block bg-white/5 border border-white/10 text-site-muted px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase">
+                  {guide.tag}
+                </span>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* WHY FEDORA SECTION */}
+      <section className="glass-card py-16 px-8 md:px-16 overflow-hidden relative">
+        <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-brand-primary">
-              Built by you. Supported by Red Hat.
-            </h2>
-            <p className="text-lg text-slate-600 font-body leading-relaxed">
-              The Fedora Project is a global partnership of free software
-              community members. We believe that open source is the future of
-              innovation.
-            </p>
-            <ul className="space-y-4">
-              {[
-                "Contribute to code, design, or documentation",
-                "Organize or attend local meetups and events",
-                "Advocate for free software in your region",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-slate-700">
-                  <CheckCircle2
-                    className="text-brand-secondary shrink-0"
-                    size={20}
-                  />
-                  <span className="font-medium font-body">{item}</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">{t("why-fedora-title")}</h2>
+            <ul className="space-y-6">
+              {whyFedora.map((item, idx) => (
+                <li key={idx} className="flex gap-4">
+                  <CheckCircle2 className="text-site-ok shrink-0 mt-1" size={20} />
+                  <div>
+                    <h4 className="text-white font-bold">{item.title}</h4>
+                    <p className="text-site-muted text-sm font-body">{item.desc}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-            <button className="bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-primary transition-all shadow-md">
-              Get Involved Today
-            </button>
           </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-center text-center"
-              >
-                <div className={`text-4xl font-black mb-2 ${stat.color}`}>
-                  {stat.value}
-                </div>
-                <div className="text-sm font-semibold text-slate-500 uppercase tracking-widest">
-                  {stat.label}
-                </div>
+          <div className="hidden md:block">
+            <div className="relative">
+              <div className="absolute inset-0 bg-site-primary blur-[120px] opacity-20 rounded-full animate-pulse"></div>
+              <div className="relative glass p-8 rounded-3xl border-[#3a528e] border-2">
+                <pre className="text-xs text-blue-300 font-mono leading-relaxed overflow-hidden">
+                  {`$ sudo dnf update
+$ sudo dnf install nodejs docker-ce
+$ fedora-welcome --ready
+                  
+> System Status: OPTIMIZED
+> Security: ACTIVE
+> Developer Mode: ON`}
+                </pre>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Path Finder Widget */}
-      <section className="bg-slate-900 rounded-3xl p-12 text-white text-center space-y-10">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h2 className="text-4xl font-bold">Find Your Path</h2>
-          <p className="text-slate-400 font-body">
-            Not sure where to start? Tell us what you enjoy, and we&apos;ll point
-            you to the right team.
+      {/* COMMUNITY SECTION */}
+      <section id="community" className="text-center space-y-12 py-12">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <h2 className="text-4xl font-bold text-white">{t("community-title")}</h2>
+          <p className="text-site-muted text-lg font-body">
+            {t("community-desc")}
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {paths.map((path) => (
-            <button
-              key={path.name}
-              className="flex flex-col items-center gap-4 p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/30 transition-all group"
-            >
-              <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center text-brand-tertiary group-hover:scale-110 transition-transform">
-                <path.icon size={32} />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {communityCards.map((item, idx) => (
+            <div key={idx} className="space-y-4 p-8 hover:bg-white/5 rounded-2xl transition-colors cursor-default group">
+              <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto text-site-primary group-hover:scale-110 transition-transform">
+                <item.icon size={32} />
               </div>
-              <span className="font-bold text-sm tracking-tight">
-                {path.name}
-              </span>
-            </button>
+              <h3 className="text-xl font-bold text-white">{item.title}</h3>
+              <p className="text-site-muted font-body text-sm">{item.desc}</p>
+            </div>
           ))}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4 pt-8">
+          <button className="btn-site-primary px-12 py-4 text-lg">{t("community-tg")}</button>
+          <button className="btn-site-ghost px-12 py-4 text-lg">{t("community-dc")}</button>
         </div>
       </section>
     </div>

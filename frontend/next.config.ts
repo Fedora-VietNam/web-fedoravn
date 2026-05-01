@@ -5,6 +5,6 @@ const nextConfig = {}
 
 const withNextIntl = createNextIntPlugin()
 
-console.log(withNextIntl)
+
 
 export default withNextIntl(nextConfig)
