@@ -6,15 +6,17 @@ import { getLocale, getMessages } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { ReactNode } from "react"
 import HubLayout from "@/components/layout/hub-layout"
+import { AppSettingsProvider } from "@/hooks/use-app-settings"
+import { ThemeProvider } from "@/components/theme-provider"
 
-const plusJakartaSans = Plus_Jakarta_Sans({ 
-  subsets: ["latin"], 
-  variable: "--font-sans" 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
 })
 
-const workSans = Work_Sans({ 
-  subsets: ["latin"], 
-  variable: "--font-body" 
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
 })
 
 const fontMono = Geist_Mono({
@@ -44,31 +46,18 @@ export default async function RootLayout({
         workSans.variable
       )}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark')
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-      </head>
+      <head></head>
       <body>
         <SessionProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <HubLayout>
-              {children}
-            </HubLayout>
+            <ThemeProvider>
+              <AppSettingsProvider>
+                <HubLayout>{children}</HubLayout>
+              </AppSettingsProvider>
+            </ThemeProvider>
           </NextIntlClientProvider>
         </SessionProvider>
       </body>
     </html>
   )
 }
-

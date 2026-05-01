@@ -2,20 +2,35 @@
 import { useState, useEffect } from "react"
 import { Sun, Moon } from "lucide-react"
 
+function getInitialDarkTheme() {
+  if (typeof window === "undefined") {
+    return true
+  }
+
+  const savedTheme = localStorage.getItem("theme")
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+  if (savedTheme === "light") {
+    return false
+  }
+
+  if (savedTheme === "dark") {
+    return true
+  }
+
+  return systemDark
+}
+
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(() => getInitialDarkTheme())
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    if (savedTheme === "light" || (!savedTheme && !systemDark)) {
-      setIsDark(false)
-      document.documentElement.classList.remove("dark")
-    } else {
-      setIsDark(true)
+    if (isDark) {
       document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
     }
-  }, [])
+  }, [isDark])
 
   const toggle = () => {
     const newDark = !isDark
@@ -30,9 +45,9 @@ export function ThemeToggle() {
   }
 
   return (
-    <button 
-      onClick={toggle} 
-      className="p-2 rounded-lg hover:bg-white/5 transition-colors text-site-muted hover:text-white flex items-center justify-center"
+    <button
+      onClick={toggle}
+      className="flex items-center justify-center rounded-lg p-2 text-site-muted transition-colors hover:bg-site-bg-soft hover:text-site-text"
       aria-label="Toggle theme"
     >
       {isDark ? <Sun size={18} /> : <Moon size={18} />}
