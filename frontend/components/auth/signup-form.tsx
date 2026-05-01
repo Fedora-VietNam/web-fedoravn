@@ -3,10 +3,15 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import Link from "next/link"
-import { Mail, Lock, User, Phone, Loader2 } from "lucide-react"
 import { signup } from "@/actions/auth"
+import { SignupFormFields } from "./signup-form-parts/signup-form-fields"
+import { SignupFormActions } from "./signup-form-parts/signup-form-actions"
 
+/**
+ * @brief A component that renders a signup form for new user registration.
+ * 
+ * @returns A form for creating a new user account.
+ */
 export function SignupForm() {
   const t = useTranslations()
   const router = useRouter()
@@ -14,6 +19,11 @@ export function SignupForm() {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
+  /**
+   * @brief Handles the signup form submission.
+   * 
+   * Calls the signup server action and handles the response.
+   */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
@@ -23,11 +33,11 @@ export function SignupForm() {
     const formData = new FormData(e.currentTarget)
     const res = await signup(formData)
 
-    if (res.error) {
+    if (res?.error) {
       setError(res.error)
       setLoading(false)
     } else {
-      setSuccess(res.success || "Đăng ký thành công!")
+      setSuccess(t("auth-signup-success"))
       setTimeout(() => {
         router.push("/login")
       }, 2000)
@@ -53,80 +63,9 @@ export function SignupForm() {
           </div>
         )}
 
-        <div className="space-y-4">
-          <div className="relative group">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-site-muted group-focus-within:text-site-primary transition-colors" size={18} />
-            <input
-              name="name"
-              type="text"
-              required
-              placeholder={t("auth-name")}
-              className="w-full bg-[#111a34] border border-[#3a528e] rounded-xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-site-primary outline-none transition-all"
-            />
-          </div>
-
-          <div className="relative group">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-site-muted group-focus-within:text-site-primary transition-colors" size={18} />
-            <input
-              name="username"
-              type="text"
-              required
-              placeholder="Username"
-              className="w-full bg-[#111a34] border border-[#3a528e] rounded-xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-site-primary outline-none transition-all"
-            />
-          </div>
-
-          <div className="relative group">
-            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-site-muted group-focus-within:text-site-primary transition-colors" size={18} />
-            <input
-              name="phone"
-              type="tel"
-              required
-              placeholder="Số điện thoại"
-              className="w-full bg-[#111a34] border border-[#3a528e] rounded-xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-site-primary outline-none transition-all"
-            />
-          </div>
-
-          <div className="relative group">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-site-muted group-focus-within:text-site-primary transition-colors" size={18} />
-            <input
-              name="email"
-              type="email"
-              required
-              placeholder={t("auth-email")}
-              className="w-full bg-[#111a34] border border-[#3a528e] rounded-xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-site-primary outline-none transition-all"
-            />
-          </div>
-
-          <div className="relative group">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-site-muted group-focus-within:text-site-primary transition-colors" size={18} />
-            <input
-              name="password"
-              type="password"
-              required
-              placeholder={t("auth-password")}
-              className="w-full bg-[#111a34] border border-[#3a528e] rounded-xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-site-primary outline-none transition-all"
-            />
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="btn-site-primary w-full py-4 text-lg flex items-center justify-center gap-2"
-        >
-          {loading ? <Loader2 className="animate-spin" size={20} /> : t("auth-signup-btn")}
-        </button>
+        <SignupFormFields />
+        <SignupFormActions loading={loading} />
       </form>
-
-      <div className="text-center pt-4">
-        <p className="text-site-muted font-body text-sm">
-          {t("auth-have-account")}{" "}
-          <Link href="/login" className="text-site-primary font-bold hover:underline">
-            {t("auth-login")}
-          </Link>
-        </p>
-      </div>
     </div>
   )
 }
