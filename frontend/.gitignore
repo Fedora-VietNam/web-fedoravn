@@ -37,3 +37,4 @@ next-env.d.ts
 
 # Vscode setting files
 /.vscode
+/generated/prisma

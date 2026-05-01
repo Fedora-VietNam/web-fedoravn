@@ -1,7 +1,6 @@
 import { Plus_Jakarta_Sans, Work_Sans, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { getLocale, getMessages } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
@@ -23,6 +22,8 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+import { SessionProvider } from "next-auth/react"
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -43,15 +44,31 @@ export default async function RootLayout({
         workSans.variable
       )}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body>
-        <ThemeProvider>
+        <SessionProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <HubLayout>
               {children}
             </HubLayout>
           </NextIntlClientProvider>
-        </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   )
 }
+

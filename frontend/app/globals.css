@@ -101,6 +101,21 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+
+    /* Dark Theme Base (for Light Mode Inversion) */
+    --color-site-bg: #0b1020;
+    --color-site-bg-soft: #121a31;
+    --color-site-card: #151f3b;
+    --color-site-line: #2a3a66;
+    --color-site-text: #e8eeff;
+    --color-site-muted: #a9b8dd;
+    --color-site-primary: #5b8cff;
+    --color-site-primary-2: #7a5cff;
+    --color-site-ok: #39c77a;
+
+    --grad-stop-1: #1a2550;
+    --grad-stop-2: var(--color-site-bg);
+    --grad-stop-3: #070b16;
 }
 
 .dark {
@@ -135,7 +150,33 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+
+    /* Dark Theme Custom overrides */
+    --color-site-bg: #0b1020;
+    --color-site-bg-soft: #121a31;
+    --color-site-card: #151f3b;
+    --color-site-line: #2a3a66;
+    --color-site-text: #e8eeff;
+    --color-site-muted: #a9b8dd;
+    --color-site-primary: #5b8cff;
+    --color-site-primary-2: #7a5cff;
+    --color-site-ok: #39c77a;
+
+    --grad-stop-1: #1a2550;
+    --grad-stop-2: var(--color-site-bg);
+    --grad-stop-3: #070b16;
 }
+
+html:not(.dark) {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #0b1020;
+}
+
+html:not(.dark) img,
+html:not(.dark) video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 
 @layer base {
   * {
@@ -143,7 +184,7 @@
     }
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    background: radial-gradient(circle at 20% 10%, #1a2550 0%, var(--color-site-bg) 45%, #070b16 100%) fixed;
+    background: radial-gradient(circle at 20% 10%, var(--grad-stop-1) 0%, var(--grad-stop-2) 45%, var(--grad-stop-3) 100%) fixed;
     }
   html {
     @apply font-sans;
@@ -183,5 +224,10 @@
 
   .btn-site-ghost {
     @apply border border-[#375089] text-site-muted bg-[#101a34] font-bold px-6 py-3 rounded-xl transition-all hover:text-white hover:border-[#4f6fb4];
+  }
+
+  .glass-panel {
+    @apply backdrop-blur-md rounded-2xl p-6 -mx-6 inline-block;
+    background: color-mix(in srgb, var(--color-site-bg) 50%, transparent);
   }
 }

@@ -1,8 +1,9 @@
-export default function Page() {
+import { DocsContent } from "@/components/docs/docs-content"
+
+export default function DocsPage() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-brand-primary">Documentation</h1>
-      <p className="mt-4 text-slate-600 font-body">Coming soon...</p>
+    <div className="container mx-auto px-6 py-12">
+      <DocsContent />
     </div>
   )
 }
