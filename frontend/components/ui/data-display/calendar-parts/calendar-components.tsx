@@ -1,11 +1,19 @@
 "use client"
 
 import * as React from "react"
-import { type DayButton, type Locale, getDefaultClassNames } from "react-day-picker"
+import {
+  type DayButton,
+  type Locale,
+  getDefaultClassNames,
+} from "react-day-picker"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui"
-import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+} from "lucide-react"
 
 /**
  * @brief Custom component for rendering individual day buttons within the calendar.
@@ -59,7 +67,11 @@ function CalendarDayButton({
 /**
  * @brief Custom root container for the DayPicker.
  */
-const CalendarRoot = ({ className, rootRef, ...props }: React.ComponentProps<"div"> & { rootRef: React.RefObject<HTMLDivElement> }) => {
+const CalendarRoot = ({
+  className,
+  rootRef,
+  ...props
+}: React.ComponentProps<"div"> & { rootRef?: React.Ref<HTMLDivElement> }) => {
   return (
     <div
       data-slot="calendar"
@@ -73,28 +85,56 @@ const CalendarRoot = ({ className, rootRef, ...props }: React.ComponentProps<"di
 /**
  * @brief Custom navigation icons (Left/Right/Down) based on orientation.
  */
-const CalendarChevron = ({ className, orientation, ...props }: React.ComponentProps<"svg"> & { orientation?: "left" | "right" | "down" }) => {
+const CalendarChevron = ({
+  className,
+  orientation,
+  size,
+  disabled,
+  ...props
+}: React.SVGProps<SVGSVGElement> & {
+  size?: number
+  disabled?: boolean
+  orientation?: "left" | "right" | "down" | "up"
+}) => {
   if (orientation === "left") {
     return (
-      <ChevronLeftIcon className={cn("size-4", className)} {...props} />
+      <ChevronLeftIcon
+        aria-disabled={disabled}
+        className={cn("size-4", className)}
+        size={size}
+        {...props}
+      />
     )
   }
 
   if (orientation === "right") {
     return (
-      <ChevronRightIcon className={cn("size-4", className)} {...props} />
+      <ChevronRightIcon
+        aria-disabled={disabled}
+        className={cn("size-4", className)}
+        size={size}
+        {...props}
+      />
     )
   }
 
   return (
-    <ChevronDownIcon className={cn("size-4", className)} {...props} />
+    <ChevronDownIcon
+      aria-disabled={disabled}
+      className={cn("size-4", orientation === "up" && "rotate-180", className)}
+      size={size}
+      {...props}
+    />
   )
 }
 
 /**
  * @brief Custom week number display.
  */
-const CalendarWeekNumber = ({ children, ...props }: React.ComponentProps<"td">) => {
+const CalendarWeekNumber = ({
+  children,
+  ...props
+}: React.ComponentProps<"td">) => {
   return (
     <td {...props}>
       <div className="flex size-(--cell-size) items-center justify-center text-center">

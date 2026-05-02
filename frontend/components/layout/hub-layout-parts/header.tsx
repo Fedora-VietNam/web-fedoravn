@@ -13,21 +13,21 @@ interface HeaderProps {
 
 /**
  * @brief Renders the application's top navigation header.
- * 
+ *
  * Handles desktop and mobile navigation, user session status, and theme/language toggles.
- * 
+ *
  * @param props.isMobileMenuOpen - Whether the mobile menu is currently visible
  * @param props.setIsMobileMenuOpen - Callback to toggle mobile menu visibility
  * @returns A JSX element representing the header.
  */
 export function Header({ isMobileMenuOpen, setIsMobileMenuOpen }: HeaderProps) {
   return (
-    <header className="nav fixed top-0 w-full z-50 bg-[#0b1020dd] backdrop-blur-md border-b border-[#24345f]">
-      <div className="max-w-7xl mx-auto px-6 h-[66px] flex items-center justify-between gap-5">
+    <header className="nav fixed top-0 z-50 w-full border-b border-[#24345f] bg-[#0b1020dd] pt-[env(safe-area-inset-top)] backdrop-blur-md">
+      <div className="mx-auto flex h-[66px] max-w-7xl items-center justify-between gap-5 px-6">
         <div className="flex items-center gap-8">
-          <HeaderLogo 
-            isMobileMenuOpen={isMobileMenuOpen} 
-            setIsMobileMenuOpen={setIsMobileMenuOpen} 
+          <HeaderLogo
+            isMobileMenuOpen={isMobileMenuOpen}
+            setIsMobileMenuOpen={setIsMobileMenuOpen}
           />
           <HeaderNav />
         </div>
@@ -35,9 +35,9 @@ export function Header({ isMobileMenuOpen, setIsMobileMenuOpen }: HeaderProps) {
       </div>
 
       {/* MOBILE MENU */}
-      <HeaderMobileMenu 
-        isMobileMenuOpen={isMobileMenuOpen} 
-        setIsMobileMenuOpen={setIsMobileMenuOpen} 
+      <HeaderMobileMenu
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
     </header>
   )

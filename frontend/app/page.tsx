@@ -16,7 +16,7 @@ import { ContributorsSection } from "./page-parts/contributors-section"
  */
 export default function Portal() {
   return (
-    <div className="py-12 space-y-24">
+    <div className="py-12 px-4 space-y-24">
       <HeroSection />
       <QuickStartSection />
       <FeaturedGuidesSection />
