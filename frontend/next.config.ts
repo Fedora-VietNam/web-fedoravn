@@ -1,7 +1,9 @@
-import createNextIntPlugin from 'next-intl/plugin'
+import createNextIntPlugin from "next-intl/plugin"
+import type { NextConfig } from "next"
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
+  output: "standalone",
   async headers() {
     return [
       {
@@ -25,7 +27,8 @@ const nextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://api.dicebear.com; font-src 'self' data:; connect-src 'self' https://api.dicebear.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://api.dicebear.com; font-src 'self' data:; connect-src 'self' https://api.dicebear.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
           },
         ],
       },
@@ -34,7 +37,5 @@ const nextConfig = {
 }
 
 const withNextIntl = createNextIntPlugin()
-
-
 
 export default withNextIntl(nextConfig)

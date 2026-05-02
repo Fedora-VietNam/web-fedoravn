@@ -1,4 +1,4 @@
-import { DocsContent } from "@/components/docs/docs-content"
+import { DocsContent } from "@/components"
 
 export default function DocsPage() {
   return (

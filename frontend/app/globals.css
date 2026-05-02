@@ -230,4 +230,20 @@ html:not(.dark) video {
     @apply backdrop-blur-md rounded-2xl p-6 -mx-6 inline-block;
     background: color-mix(in srgb, var(--color-site-bg) 50%, transparent);
   }
+
+  .stat {
+    @apply border border-[#304a85] bg-[#101a33] rounded-xl p-3.5 transition-all duration-300;
+  }
+
+  .stat:hover {
+    @apply border-[#3e5a96] shadow-lg shadow-blue-900/10 -translate-y-0.5;
+  }
+
+  .stat b {
+    @apply block text-xl mb-3 text-white;
+  }
+
+  .stat span {
+    @apply text-xs text-site-muted;
+  }
 }

@@ -11,6 +11,7 @@
   "hero-cta2": "Đọc tài liệu",
   "hero-stat1": "Nội dung mở, dễ đóng góp",
   "hero-stat2": "Tối ưu cho máy tính",
+  "hero-stat3-label": "Đang hoạt động",
   "hero-stat3": "Cập nhật thường xuyên",
   "aside-title": "Truy cập nhanh",
   "aside-quick1": "Cài Fedora Workstation từ USB",
@@ -124,5 +125,14 @@
   "forum-started-by": "Bởi",
   "forum-replies": "Trả lời",
   "forum-views": "Lượt xem",
-  "forum-load-more": "Tải thêm chủ đề"
+  "forum-load-more": "Tải thêm chủ đề",
+  "contributors-others": "Và hàng trăm cộng tác viên khác trên toàn Việt Nam",
+  "auth-login-error": "Tên đăng nhập, email hoặc mật khẩu không đúng.",
+  "auth-generic-error": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+  "auth-signup-success": "Đăng ký thành công!",
+  "footer-disclaimer-label": "Miễn trừ trách nhiệm",
+  "footer-trademark-label": "Thương hiệu",
+  "footer-privacy-label": "Quyền riêng tư",
+  "footer-terms": "Điều khoản sử dụng",
+  "footer-built-by": "Được xây dựng bởi cộng đồng Việt Nam"
 }
